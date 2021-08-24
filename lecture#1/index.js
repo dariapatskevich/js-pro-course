@@ -30,8 +30,43 @@ function addSymbols(num) {
 console.log(addSymbols(num));
 
 //№4Создайте 2 массива с разной длинной. Необходимо написать код,который создаёт массив элементов представляющих собой разность соответствующих элементов заданных массивов.
+function subtructionOfArrays(){
+  let array1 = [9,2,74]
+  let array2 = [1,3,5,6,5,6]
+  let result = '' 
+  for(i = 0; i < array2.length; i++){
+      if(isNaN(array1[i] - array2[i])){
+          result += array2[i] + ','    
+      }else{
+          result += array1[i] - array2[i] + ','
+      }
+  }
+  result = result.split(',')
+  result.splice(-1,1)
+  return result
+}
+
+subtructionOfArrays();
 
 //№5Создайте 2 массива с разной длинной. Необходимо написать код,который создаёт массив элементов представляющих собой сумму соответствующих элементов заданных массивов.
+function sumOfArrays(){
+  let array1 = [4,5,2]
+  let array2 = [1,3,5,6]
+  let result = '' 
+  for(i = 0; i < array2.length; i++){
+      if(isNaN(array1[i] + array2[i])){
+          result += array2[i] + ','    
+      }else{
+          result += array1[i] + array2[i] + ','
+      }
+  }
+  result = result.split(',')
+  result.splice(-1,1)
+  return result
+}
+
+sumOfArrays();
+
 
 //№6Напишите код, который разворачивает исходный массив и сохраняет это в новую переменную. Например: исходный массив - [1, 2, 3], результирующий массив - [3, 2, 1]
 
@@ -45,20 +80,31 @@ console.log(printArray)
 
 //№7Фильтр юзеров Создать массив объектов для юзеров. Пример:[{name: ‘Ivan’, age: 18}, {name: ‘Petr’, age: 12}, {name: ‘Sidor’, age: 25}, {...}, ...]Написать скрипт, который будет на выходе отдавать два массива. Первый с совершеннолетними пользователями, второй с несовершеннолетними.
 
+let users = [{name: 'Ivan', age: 18},{name: 'Petr', age: 12},{name: 'Sidor', age: 25},{name: 'Zheka', age: 29}]
+let adult = [];
+let underage  = [];
+    for(let user of users){
+        if(user.age >= 18) {
+            adult.push(user)
+        } else {
+        underage.push(user)
+        }
+    }
+
 //№8Необходимо создать массив из 15 элементов. В массиве обязательно должны быть одинаковые значения. Напишите код, который уберет эти дубликаты из созданного массива.
 
 let arr = ["b", "p", "s", "c","s", "s", "h", "h", "a","b", "p", "s", "c","b","p"];
 function removeDuplicates(arr) {
 let obj = {},
-    get = [];
+    result = [];
 for (let i = 0; i < arr.length; i++) {
   let str = arr[i];
   obj[str] = true;
 }
    for (i in obj) {
-     get.push(i);
+     result.push(i);
    }
-   return get;
+   return result;
 
 }
 console.log(removeDuplicates(arr))
@@ -91,3 +137,15 @@ function search(arr, str) {
 }
 
 //№12Написать функцию сравнения двух массивов, которая возвращает true или false в зависимости от того, одинаковые у них элементы или нет. Пример:checkIsEqaul([1,2,3], [1,2,3]) -> truecheckIsEqaul([1,2,3], [1,2,3,4]) -> falsecheckIsEqaul([1,2,3], [1,'2',3]) -> false
+
+function checkEqaulityOfArrays(array1, array2) {
+  if (array1.length !== array2.length) {
+    return false;
+  }
+  for (let i = 0; i < array1.length; i++) {
+    if (array1[i] !== array2[i]) {
+      return false;
+    }
+  }
+  return true;
+}
