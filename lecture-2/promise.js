@@ -138,5 +138,30 @@ getTodo();
 
 //7Сделать запрос при помощи fetch на адрес https://jsonplaceholder.typicode.com/albums/1/photos, вывести фотографии, используя тег img. В качестве src для img использовать поле url в объекте фото{"albumId": 1,  "id": 4,  "title": "culpa odio esse rerum omnis laboriosam voluptate repudiandae",  "url": "https://via.placeholder.com/600/d32776",  "thumbnailUrl": "https://via.placeholder.com/150/d32776"},Дополнительно сделать, чтобы по нажатию на картинку картинка увеличивалась в размерах, повторное нажатие вернет картинку к исходному размеру. Вывести в html внутри div с id = 3
 
+let promptId = prompt('Enter ID photo from 1 to 50)')
 
-  
+async function getPhoto() {
+    const request = await fetch(`https://jsonplaceholder.typicode.com/albums/1/photos?id=${promptId}`)
+    const promptIdPhoto = await request.json()
+    console.log('Photo', promptIdPhoto)
+
+    let result = `<div class="photo" style="border: 1px solid green; padding: 10px"
+    <h3>AlbumId: ${promptIdPhoto[0].albumId}</h3>
+    <h3>ID: ${promptIdPhoto[0].id}</h3>
+    <h4>Title: ${promptIdPhoto[0].title}</h4>
+    <img id="imgId" src="${promptIdPhoto[0].thumbnailUrl}">
+    </div>`;
+
+    const body = document.querySelector('body')
+    body.innerHTML = result;
+
+    let clickPhoto = document.querySelector("#imgId")
+    clickPhoto.onclick = function () {
+        if (clickPhoto.src === promptIdPhoto[0].thumbnailUrl) {
+            clickPhoto.src = promptIdPhoto[0].url;
+        } else if (clickPhoto.src === promptIdPhoto[0].url) {
+            clickPhoto.src = promptIdPhoto[0].thumbnailUrl;
+        }
+    };
+}
+getPhoto()
